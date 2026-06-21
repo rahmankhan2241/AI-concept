@@ -2,8 +2,10 @@
 
 import os
 import requests
+from dotenv import load_dotenv
 
-api_key = ""
+load_dotenv()
+api_key = os.getenv("GROQ_API_KEY")
 url = "https://api.groq.com/openai/v1/chat/completions"
 headers = {"Authorization" : f"Bearer {api_key}", "Content-Type": "application/json"}
 
