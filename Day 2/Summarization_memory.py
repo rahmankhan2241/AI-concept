@@ -9,15 +9,16 @@ api_key = os.getenv("GROQ_API_KEY")
 url = "https://api.groq.com/openai/v1/chat/completions"
 headers = {"Authorization" : f"Bearer {api_key}", "Content-Type": "application/json"}
 
-context_window_length = 10
+context_window_length = 4
 
 conversation_history = []
 
 while True:
     user_input = input("user: ").strip()
-    if len(conversation_history) == context_window_length-1:
-        new_user_input = user_input + "Please remember all the core details of the conversation in a summary"
-        conversation_history.append({"role": "user", "content": new_user_input})
+    if len(conversation_history) > context_window_length:
+        user_input = user_input + "Please remember all the core details of the conversation in a summary"
+        print(user_input)
+        conversation_history.append({"role": "user", "content": user_input})
     
     conversation_history.append({"role": "user", "content": user_input})
 
